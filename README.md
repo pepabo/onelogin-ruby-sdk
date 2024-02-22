@@ -56,16 +56,14 @@ Please follow the [installation](#installation) procedure and then run the follo
 # Load the gem
 require 'onelogin'
 
-api_instance = OneLogin::DefaultApi.new
-authorization = 'authorization_example' # String | 
-user_id = 56 # Integer | Set to the id of the user.
-activate_factor_request = OneLogin::ActivateFactorRequest.new # ActivateFactorRequest | 
+client_id = ENV.fetch('ONELOGIN_CLIENT_ID')
+client_secret = ENV.fetch('ONELOGIN_CLIENT_SECRET')
 
-begin
-  api_instance.activate_factor(authorization, user_id, activate_factor_request)
-rescue OneLogin::ApiError => e
-  puts "Exception when calling DefaultApi->activate_factor: #{e}"
+OneLogin.configure do |config|
+  config.host = '<your onelogin host>'
+  config.debugging = true if ENV.fetch('DEBUG', false)
 end
+OneLogin::Api.new(client_id, client_secret)
 
 ```
 
@@ -75,107 +73,107 @@ All URIs are relative to *https://onelogininc.onelogin.com*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*OneLogin::DefaultApi* | [**activate_factor**](docs/DefaultApi.md#activate_factor) | **POST** /api/2/mfa/users/{user_id}/verifications | 
-*OneLogin::DefaultApi* | [**add_access_token_claim**](docs/DefaultApi.md#add_access_token_claim) | **POST** /api/2/api_authorizations/{id}/claims | 
-*OneLogin::DefaultApi* | [**add_client_app**](docs/DefaultApi.md#add_client_app) | **POST** /api/2/api_authorizations/{id}/clients | 
-*OneLogin::DefaultApi* | [**add_role_admins**](docs/DefaultApi.md#add_role_admins) | **POST** /api/2/roles/{role_id}/admins | 
-*OneLogin::DefaultApi* | [**add_role_users**](docs/DefaultApi.md#add_role_users) | **POST** /api/2/roles/{role_id}/users | 
-*OneLogin::DefaultApi* | [**add_scope**](docs/DefaultApi.md#add_scope) | **POST** /api/2/api_authorizations/{id}/scopes | 
-*OneLogin::DefaultApi* | [**bulk_mapping_sort**](docs/DefaultApi.md#bulk_mapping_sort) | **PUT** /api/2/apps/mappings/sort | 
-*OneLogin::DefaultApi* | [**bulk_sort**](docs/DefaultApi.md#bulk_sort) | **PUT** /api/2/apps/{app_id}/rules/sort | 
-*OneLogin::DefaultApi* | [**create_app**](docs/DefaultApi.md#create_app) | **POST** /api/2/apps | 
-*OneLogin::DefaultApi* | [**create_authorization_server**](docs/DefaultApi.md#create_authorization_server) | **POST** /api/2/api_authorizations | 
-*OneLogin::DefaultApi* | [**create_environment_variable**](docs/DefaultApi.md#create_environment_variable) | **POST** /api/2/hooks/envs | 
-*OneLogin::DefaultApi* | [**create_hook**](docs/DefaultApi.md#create_hook) | **POST** /api/2/hooks | 
-*OneLogin::DefaultApi* | [**create_mapping**](docs/DefaultApi.md#create_mapping) | **POST** /api/2/mappings | 
-*OneLogin::DefaultApi* | [**create_risk_rule**](docs/DefaultApi.md#create_risk_rule) | **POST** /api/2/risk/rules | 
-*OneLogin::DefaultApi* | [**create_roles**](docs/DefaultApi.md#create_roles) | **POST** /api/2/roles | 
-*OneLogin::DefaultApi* | [**create_rule**](docs/DefaultApi.md#create_rule) | **POST** /api/2/apps/{app_id}/rules | 
-*OneLogin::DefaultApi* | [**create_user**](docs/DefaultApi.md#create_user) | **POST** /api/2/users | 
-*OneLogin::DefaultApi* | [**delete_access_token_claim**](docs/DefaultApi.md#delete_access_token_claim) | **DELETE** /api/2/api_authorizations/{id}/claims/{claim_id} | 
-*OneLogin::DefaultApi* | [**delete_app**](docs/DefaultApi.md#delete_app) | **DELETE** /api/2/apps/{app_id} | 
-*OneLogin::DefaultApi* | [**delete_app_parameter**](docs/DefaultApi.md#delete_app_parameter) | **DELETE** /api/2/apps/{app_id}/parameters/{parameter_id} | 
-*OneLogin::DefaultApi* | [**delete_authorization_server**](docs/DefaultApi.md#delete_authorization_server) | **DELETE** /api/2/api_authorizations/{id} | 
-*OneLogin::DefaultApi* | [**delete_environment_variable**](docs/DefaultApi.md#delete_environment_variable) | **DELETE** /api/2/hooks/envs/{envvar_id} | 
-*OneLogin::DefaultApi* | [**delete_factor**](docs/DefaultApi.md#delete_factor) | **DELETE** /api/2/mfa/users/{user_id}/devices/{device_id} | 
-*OneLogin::DefaultApi* | [**delete_hook**](docs/DefaultApi.md#delete_hook) | **DELETE** /api/2/hooks/{hook_id} | 
-*OneLogin::DefaultApi* | [**delete_mapping**](docs/DefaultApi.md#delete_mapping) | **DELETE** /api/2/mappings/{mapping_id} | 
-*OneLogin::DefaultApi* | [**delete_risk_rule**](docs/DefaultApi.md#delete_risk_rule) | **DELETE** /api/2/risk/rules/{risk_rule_id} | 
-*OneLogin::DefaultApi* | [**delete_role**](docs/DefaultApi.md#delete_role) | **DELETE** /api/2/roles/{role_id} | 
-*OneLogin::DefaultApi* | [**delete_rule**](docs/DefaultApi.md#delete_rule) | **DELETE** /api/2/apps/{app_id}/rules/{rule_id} | 
-*OneLogin::DefaultApi* | [**delete_scope**](docs/DefaultApi.md#delete_scope) | **DELETE** /api/2/api_authorizations/{id}/scopes/{scope_id} | 
-*OneLogin::DefaultApi* | [**delete_user**](docs/DefaultApi.md#delete_user) | **DELETE** /api/2/users/{user_id} | 
-*OneLogin::DefaultApi* | [**dry_run_mapping**](docs/DefaultApi.md#dry_run_mapping) | **POST** /api/2/mappings/{mapping_id}/dryrun | 
-*OneLogin::DefaultApi* | [**enroll_factor**](docs/DefaultApi.md#enroll_factor) | **POST** /api/2/mfa/users/{user_id}/registrations | 
-*OneLogin::DefaultApi* | [**generate_mfa_token**](docs/DefaultApi.md#generate_mfa_token) | **POST** /api/2/mfs/users/{user_id}/mfa_token | 
-*OneLogin::DefaultApi* | [**generate_saml_assertion**](docs/DefaultApi.md#generate_saml_assertion) | **POST** /api/2/saml_assertion | 
-*OneLogin::DefaultApi* | [**generate_token**](docs/DefaultApi.md#generate_token) | **POST** /auth/oauth2/v2/token | 
-*OneLogin::DefaultApi* | [**get_app**](docs/DefaultApi.md#get_app) | **GET** /api/2/apps/{app_id} | 
-*OneLogin::DefaultApi* | [**get_authorization_server**](docs/DefaultApi.md#get_authorization_server) | **GET** /api/2/api_authorizations/{id} | 
-*OneLogin::DefaultApi* | [**get_available_factors**](docs/DefaultApi.md#get_available_factors) | **GET** /api/2/mfa/users/{user_id}/factors | 
-*OneLogin::DefaultApi* | [**get_client_apps**](docs/DefaultApi.md#get_client_apps) | **GET** /api/2/api_authorizations/{id}/clients | 
-*OneLogin::DefaultApi* | [**get_enrolled_factors**](docs/DefaultApi.md#get_enrolled_factors) | **GET** /api/2/mfa/users/{user_id}/devices | 
-*OneLogin::DefaultApi* | [**get_environment_variable**](docs/DefaultApi.md#get_environment_variable) | **GET** /api/2/hooks/envs/{envvar_id} | 
-*OneLogin::DefaultApi* | [**get_hook**](docs/DefaultApi.md#get_hook) | **GET** /api/2/hooks/{hook_id} | 
-*OneLogin::DefaultApi* | [**get_logs**](docs/DefaultApi.md#get_logs) | **GET** /api/2/hooks/{hook_id}/logs | 
-*OneLogin::DefaultApi* | [**get_mapping**](docs/DefaultApi.md#get_mapping) | **GET** /api/2/mappings/{mapping_id} | 
-*OneLogin::DefaultApi* | [**get_rate_limit**](docs/DefaultApi.md#get_rate_limit) | **GET** /auth/rate_limit | 
-*OneLogin::DefaultApi* | [**get_risk_rule**](docs/DefaultApi.md#get_risk_rule) | **GET** /api/2/risk/rules/{risk_rule_id} | 
-*OneLogin::DefaultApi* | [**get_risk_score**](docs/DefaultApi.md#get_risk_score) | **POST** /api/2/risk/verify | 
-*OneLogin::DefaultApi* | [**get_role**](docs/DefaultApi.md#get_role) | **GET** /api/2/roles/{role_id} | 
-*OneLogin::DefaultApi* | [**get_role_admins**](docs/DefaultApi.md#get_role_admins) | **GET** /api/2/roles/{role_id}/admins | 
-*OneLogin::DefaultApi* | [**get_role_apps**](docs/DefaultApi.md#get_role_apps) | **GET** /api/2/roles/{role_id}/apps | 
-*OneLogin::DefaultApi* | [**get_role_users**](docs/DefaultApi.md#get_role_users) | **GET** /api/2/roles/{role_id}/users | 
-*OneLogin::DefaultApi* | [**get_rule**](docs/DefaultApi.md#get_rule) | **GET** /api/2/apps/{app_id}/rules/{rule_id} | 
-*OneLogin::DefaultApi* | [**get_score_insights**](docs/DefaultApi.md#get_score_insights) | **GET** /api/2/risk/scores | 
-*OneLogin::DefaultApi* | [**get_user**](docs/DefaultApi.md#get_user) | **GET** /api/2/users/{user_id} | 
-*OneLogin::DefaultApi* | [**get_user_apps**](docs/DefaultApi.md#get_user_apps) | **GET** /api/2/users/{user_id}/apps | 
-*OneLogin::DefaultApi* | [**list_access_token_claims**](docs/DefaultApi.md#list_access_token_claims) | **GET** /api/2/api_authorizations/{id}/claims | 
-*OneLogin::DefaultApi* | [**list_action_values**](docs/DefaultApi.md#list_action_values) | **GET** /api/2/apps/{app_id}/rules/actions/{actuion_value}/values | 
-*OneLogin::DefaultApi* | [**list_actions**](docs/DefaultApi.md#list_actions) | **GET** /api/2/apps/{app_id}/rules/actions | 
-*OneLogin::DefaultApi* | [**list_app_users**](docs/DefaultApi.md#list_app_users) | **GET** /api/2/apps/{app_id}/users | 
-*OneLogin::DefaultApi* | [**list_apps**](docs/DefaultApi.md#list_apps) | **GET** /api/2/apps | 
-*OneLogin::DefaultApi* | [**list_authorization_servers**](docs/DefaultApi.md#list_authorization_servers) | **GET** /api/2/api_authorizations | 
-*OneLogin::DefaultApi* | [**list_condition_operators**](docs/DefaultApi.md#list_condition_operators) | **GET** /api/2/apps/{app_id}/rules/conditions/{condition_value}/operators | 
-*OneLogin::DefaultApi* | [**list_condition_values**](docs/DefaultApi.md#list_condition_values) | **GET** /api/2/apps/{app_id}/rules/conditions/{condition_value}/values | 
-*OneLogin::DefaultApi* | [**list_conditions**](docs/DefaultApi.md#list_conditions) | **GET** /api/2/apps/{app_id}/rules/conditions | 
-*OneLogin::DefaultApi* | [**list_connectors**](docs/DefaultApi.md#list_connectors) | **GET** /api/2/connectors | 
-*OneLogin::DefaultApi* | [**list_environment_variables**](docs/DefaultApi.md#list_environment_variables) | **GET** /api/2/hooks/envs | 
-*OneLogin::DefaultApi* | [**list_hooks**](docs/DefaultApi.md#list_hooks) | **GET** /api/2/hooks | 
-*OneLogin::DefaultApi* | [**list_mapping_action_values**](docs/DefaultApi.md#list_mapping_action_values) | **GET** /api/2/apps/mappings/actions/{actuion_value}/values | 
-*OneLogin::DefaultApi* | [**list_mapping_actions**](docs/DefaultApi.md#list_mapping_actions) | **GET** /api/2/apps/mappings/actions | 
-*OneLogin::DefaultApi* | [**list_mapping_condition_operators**](docs/DefaultApi.md#list_mapping_condition_operators) | **GET** /api/2/apps/mappings/conditions/{condition_value}/operators | 
-*OneLogin::DefaultApi* | [**list_mapping_condition_values**](docs/DefaultApi.md#list_mapping_condition_values) | **GET** /api/2/apps/mappings/conditions/{condition_value}/values | 
-*OneLogin::DefaultApi* | [**list_mapping_conditions**](docs/DefaultApi.md#list_mapping_conditions) | **GET** /api/2/apps/mappings/conditions | 
-*OneLogin::DefaultApi* | [**list_mappings**](docs/DefaultApi.md#list_mappings) | **GET** /api/2/mappings | 
-*OneLogin::DefaultApi* | [**list_risk_rules**](docs/DefaultApi.md#list_risk_rules) | **GET** /api/2/risk/rules | 
-*OneLogin::DefaultApi* | [**list_roles**](docs/DefaultApi.md#list_roles) | **GET** /api/2/roles | 
-*OneLogin::DefaultApi* | [**list_rules**](docs/DefaultApi.md#list_rules) | **GET** /api/2/apps/{app_id}/rules | 
-*OneLogin::DefaultApi* | [**list_scopes**](docs/DefaultApi.md#list_scopes) | **GET** /api/2/api_authorizations/{id}/scopes | 
-*OneLogin::DefaultApi* | [**list_users**](docs/DefaultApi.md#list_users) | **GET** /api/2/users | 
-*OneLogin::DefaultApi* | [**remove_client_app**](docs/DefaultApi.md#remove_client_app) | **DELETE** /api/2/api_authorizations/{id}/clients/{client_app_id} | 
-*OneLogin::DefaultApi* | [**remove_role_admins**](docs/DefaultApi.md#remove_role_admins) | **DELETE** /api/2/roles/{role_id}/admins | 
-*OneLogin::DefaultApi* | [**remove_role_users**](docs/DefaultApi.md#remove_role_users) | **DELETE** /api/2/roles/{role_id}/users | 
-*OneLogin::DefaultApi* | [**revoke_token**](docs/DefaultApi.md#revoke_token) | **POST** /auth/oauth2/revoke | 
-*OneLogin::DefaultApi* | [**set_role_apps**](docs/DefaultApi.md#set_role_apps) | **PUT** /api/2/roles/{role_id}/apps | 
-*OneLogin::DefaultApi* | [**track_event**](docs/DefaultApi.md#track_event) | **POST** /api/2/risk/events | 
-*OneLogin::DefaultApi* | [**update_access_token_claim**](docs/DefaultApi.md#update_access_token_claim) | **PUT** /api/2/api_authorizations/{id}/claims/{claim_id} | 
-*OneLogin::DefaultApi* | [**update_app**](docs/DefaultApi.md#update_app) | **PUT** /api/2/apps/{app_id} | 
-*OneLogin::DefaultApi* | [**update_authorization_server**](docs/DefaultApi.md#update_authorization_server) | **PUT** /api/2/api_authorizations/{id} | 
-*OneLogin::DefaultApi* | [**update_client_app**](docs/DefaultApi.md#update_client_app) | **PUT** /api/2/api_authorizations/{id}/clients/{client_app_id} | 
-*OneLogin::DefaultApi* | [**update_environment_variable**](docs/DefaultApi.md#update_environment_variable) | **PUT** /api/2/hooks/envs/{envvar_id} | 
-*OneLogin::DefaultApi* | [**update_hook**](docs/DefaultApi.md#update_hook) | **PUT** /api/2/hooks/{hook_id} | 
-*OneLogin::DefaultApi* | [**update_mapping**](docs/DefaultApi.md#update_mapping) | **PUT** /api/2/mappings/{mapping_id} | 
-*OneLogin::DefaultApi* | [**update_risk_rule**](docs/DefaultApi.md#update_risk_rule) | **PUT** /api/2/risk/rules/{risk_rule_id} | 
-*OneLogin::DefaultApi* | [**update_role**](docs/DefaultApi.md#update_role) | **PUT** /api/2/roles/{role_id} | 
-*OneLogin::DefaultApi* | [**update_rule**](docs/DefaultApi.md#update_rule) | **PUT** /api/2/apps/{app_id}/rules/{rule_id} | 
-*OneLogin::DefaultApi* | [**update_scope**](docs/DefaultApi.md#update_scope) | **PUT** /api/2/api_authorizations/{id}/scopes/{scope_id} | 
-*OneLogin::DefaultApi* | [**update_user**](docs/DefaultApi.md#update_user) | **PUT** /api/2/users/{user_id} | 
-*OneLogin::DefaultApi* | [**verify_enrollment**](docs/DefaultApi.md#verify_enrollment) | **PUT** /api/2/mfa/users/{user_id}/registrations/{registration_id} | 
-*OneLogin::DefaultApi* | [**verify_enrollment_voice_protect**](docs/DefaultApi.md#verify_enrollment_voice_protect) | **GET** /api/2/mfa/users/{user_id}/registrations/{registration_id} | 
-*OneLogin::DefaultApi* | [**verify_factor**](docs/DefaultApi.md#verify_factor) | **PUT** /api/2/mfa/users/{user_id}/verifications/{verification_id} | 
-*OneLogin::DefaultApi* | [**verify_factor_saml**](docs/DefaultApi.md#verify_factor_saml) | **POST** /api/2/saml_assertion/verify_factor | 
-*OneLogin::DefaultApi* | [**verify_factor_voice**](docs/DefaultApi.md#verify_factor_voice) | **GET** /api/2/mfa/users/{user_id}/verifications/{verification_id} | 
+*OneLogin::DefaultApi* | [**activate_factor**](docs/DefaultApi.md#activate_factor) | **POST** /api/2/mfa/users/{user_id}/verifications |
+*OneLogin::DefaultApi* | [**add_access_token_claim**](docs/DefaultApi.md#add_access_token_claim) | **POST** /api/2/api_authorizations/{id}/claims |
+*OneLogin::DefaultApi* | [**add_client_app**](docs/DefaultApi.md#add_client_app) | **POST** /api/2/api_authorizations/{id}/clients |
+*OneLogin::DefaultApi* | [**add_role_admins**](docs/DefaultApi.md#add_role_admins) | **POST** /api/2/roles/{role_id}/admins |
+*OneLogin::DefaultApi* | [**add_role_users**](docs/DefaultApi.md#add_role_users) | **POST** /api/2/roles/{role_id}/users |
+*OneLogin::DefaultApi* | [**add_scope**](docs/DefaultApi.md#add_scope) | **POST** /api/2/api_authorizations/{id}/scopes |
+*OneLogin::DefaultApi* | [**bulk_mapping_sort**](docs/DefaultApi.md#bulk_mapping_sort) | **PUT** /api/2/apps/mappings/sort |
+*OneLogin::DefaultApi* | [**bulk_sort**](docs/DefaultApi.md#bulk_sort) | **PUT** /api/2/apps/{app_id}/rules/sort |
+*OneLogin::DefaultApi* | [**create_app**](docs/DefaultApi.md#create_app) | **POST** /api/2/apps |
+*OneLogin::DefaultApi* | [**create_authorization_server**](docs/DefaultApi.md#create_authorization_server) | **POST** /api/2/api_authorizations |
+*OneLogin::DefaultApi* | [**create_environment_variable**](docs/DefaultApi.md#create_environment_variable) | **POST** /api/2/hooks/envs |
+*OneLogin::DefaultApi* | [**create_hook**](docs/DefaultApi.md#create_hook) | **POST** /api/2/hooks |
+*OneLogin::DefaultApi* | [**create_mapping**](docs/DefaultApi.md#create_mapping) | **POST** /api/2/mappings |
+*OneLogin::DefaultApi* | [**create_risk_rule**](docs/DefaultApi.md#create_risk_rule) | **POST** /api/2/risk/rules |
+*OneLogin::DefaultApi* | [**create_roles**](docs/DefaultApi.md#create_roles) | **POST** /api/2/roles |
+*OneLogin::DefaultApi* | [**create_rule**](docs/DefaultApi.md#create_rule) | **POST** /api/2/apps/{app_id}/rules |
+*OneLogin::DefaultApi* | [**create_user**](docs/DefaultApi.md#create_user) | **POST** /api/2/users |
+*OneLogin::DefaultApi* | [**delete_access_token_claim**](docs/DefaultApi.md#delete_access_token_claim) | **DELETE** /api/2/api_authorizations/{id}/claims/{claim_id} |
+*OneLogin::DefaultApi* | [**delete_app**](docs/DefaultApi.md#delete_app) | **DELETE** /api/2/apps/{app_id} |
+*OneLogin::DefaultApi* | [**delete_app_parameter**](docs/DefaultApi.md#delete_app_parameter) | **DELETE** /api/2/apps/{app_id}/parameters/{parameter_id} |
+*OneLogin::DefaultApi* | [**delete_authorization_server**](docs/DefaultApi.md#delete_authorization_server) | **DELETE** /api/2/api_authorizations/{id} |
+*OneLogin::DefaultApi* | [**delete_environment_variable**](docs/DefaultApi.md#delete_environment_variable) | **DELETE** /api/2/hooks/envs/{envvar_id} |
+*OneLogin::DefaultApi* | [**delete_factor**](docs/DefaultApi.md#delete_factor) | **DELETE** /api/2/mfa/users/{user_id}/devices/{device_id} |
+*OneLogin::DefaultApi* | [**delete_hook**](docs/DefaultApi.md#delete_hook) | **DELETE** /api/2/hooks/{hook_id} |
+*OneLogin::DefaultApi* | [**delete_mapping**](docs/DefaultApi.md#delete_mapping) | **DELETE** /api/2/mappings/{mapping_id} |
+*OneLogin::DefaultApi* | [**delete_risk_rule**](docs/DefaultApi.md#delete_risk_rule) | **DELETE** /api/2/risk/rules/{risk_rule_id} |
+*OneLogin::DefaultApi* | [**delete_role**](docs/DefaultApi.md#delete_role) | **DELETE** /api/2/roles/{role_id} |
+*OneLogin::DefaultApi* | [**delete_rule**](docs/DefaultApi.md#delete_rule) | **DELETE** /api/2/apps/{app_id}/rules/{rule_id} |
+*OneLogin::DefaultApi* | [**delete_scope**](docs/DefaultApi.md#delete_scope) | **DELETE** /api/2/api_authorizations/{id}/scopes/{scope_id} |
+*OneLogin::DefaultApi* | [**delete_user**](docs/DefaultApi.md#delete_user) | **DELETE** /api/2/users/{user_id} |
+*OneLogin::DefaultApi* | [**dry_run_mapping**](docs/DefaultApi.md#dry_run_mapping) | **POST** /api/2/mappings/{mapping_id}/dryrun |
+*OneLogin::DefaultApi* | [**enroll_factor**](docs/DefaultApi.md#enroll_factor) | **POST** /api/2/mfa/users/{user_id}/registrations |
+*OneLogin::DefaultApi* | [**generate_mfa_token**](docs/DefaultApi.md#generate_mfa_token) | **POST** /api/2/mfs/users/{user_id}/mfa_token |
+*OneLogin::DefaultApi* | [**generate_saml_assertion**](docs/DefaultApi.md#generate_saml_assertion) | **POST** /api/2/saml_assertion |
+*OneLogin::DefaultApi* | [**generate_token**](docs/DefaultApi.md#generate_token) | **POST** /auth/oauth2/v2/token |
+*OneLogin::DefaultApi* | [**get_app**](docs/DefaultApi.md#get_app) | **GET** /api/2/apps/{app_id} |
+*OneLogin::DefaultApi* | [**get_authorization_server**](docs/DefaultApi.md#get_authorization_server) | **GET** /api/2/api_authorizations/{id} |
+*OneLogin::DefaultApi* | [**get_available_factors**](docs/DefaultApi.md#get_available_factors) | **GET** /api/2/mfa/users/{user_id}/factors |
+*OneLogin::DefaultApi* | [**get_client_apps**](docs/DefaultApi.md#get_client_apps) | **GET** /api/2/api_authorizations/{id}/clients |
+*OneLogin::DefaultApi* | [**get_enrolled_factors**](docs/DefaultApi.md#get_enrolled_factors) | **GET** /api/2/mfa/users/{user_id}/devices |
+*OneLogin::DefaultApi* | [**get_environment_variable**](docs/DefaultApi.md#get_environment_variable) | **GET** /api/2/hooks/envs/{envvar_id} |
+*OneLogin::DefaultApi* | [**get_hook**](docs/DefaultApi.md#get_hook) | **GET** /api/2/hooks/{hook_id} |
+*OneLogin::DefaultApi* | [**get_logs**](docs/DefaultApi.md#get_logs) | **GET** /api/2/hooks/{hook_id}/logs |
+*OneLogin::DefaultApi* | [**get_mapping**](docs/DefaultApi.md#get_mapping) | **GET** /api/2/mappings/{mapping_id} |
+*OneLogin::DefaultApi* | [**get_rate_limit**](docs/DefaultApi.md#get_rate_limit) | **GET** /auth/rate_limit |
+*OneLogin::DefaultApi* | [**get_risk_rule**](docs/DefaultApi.md#get_risk_rule) | **GET** /api/2/risk/rules/{risk_rule_id} |
+*OneLogin::DefaultApi* | [**get_risk_score**](docs/DefaultApi.md#get_risk_score) | **POST** /api/2/risk/verify |
+*OneLogin::DefaultApi* | [**get_role**](docs/DefaultApi.md#get_role) | **GET** /api/2/roles/{role_id} |
+*OneLogin::DefaultApi* | [**get_role_admins**](docs/DefaultApi.md#get_role_admins) | **GET** /api/2/roles/{role_id}/admins |
+*OneLogin::DefaultApi* | [**get_role_apps**](docs/DefaultApi.md#get_role_apps) | **GET** /api/2/roles/{role_id}/apps |
+*OneLogin::DefaultApi* | [**get_role_users**](docs/DefaultApi.md#get_role_users) | **GET** /api/2/roles/{role_id}/users |
+*OneLogin::DefaultApi* | [**get_rule**](docs/DefaultApi.md#get_rule) | **GET** /api/2/apps/{app_id}/rules/{rule_id} |
+*OneLogin::DefaultApi* | [**get_score_insights**](docs/DefaultApi.md#get_score_insights) | **GET** /api/2/risk/scores |
+*OneLogin::DefaultApi* | [**get_user**](docs/DefaultApi.md#get_user) | **GET** /api/2/users/{user_id} |
+*OneLogin::DefaultApi* | [**get_user_apps**](docs/DefaultApi.md#get_user_apps) | **GET** /api/2/users/{user_id}/apps |
+*OneLogin::DefaultApi* | [**list_access_token_claims**](docs/DefaultApi.md#list_access_token_claims) | **GET** /api/2/api_authorizations/{id}/claims |
+*OneLogin::DefaultApi* | [**list_action_values**](docs/DefaultApi.md#list_action_values) | **GET** /api/2/apps/{app_id}/rules/actions/{actuion_value}/values |
+*OneLogin::DefaultApi* | [**list_actions**](docs/DefaultApi.md#list_actions) | **GET** /api/2/apps/{app_id}/rules/actions |
+*OneLogin::DefaultApi* | [**list_app_users**](docs/DefaultApi.md#list_app_users) | **GET** /api/2/apps/{app_id}/users |
+*OneLogin::DefaultApi* | [**list_apps**](docs/DefaultApi.md#list_apps) | **GET** /api/2/apps |
+*OneLogin::DefaultApi* | [**list_authorization_servers**](docs/DefaultApi.md#list_authorization_servers) | **GET** /api/2/api_authorizations |
+*OneLogin::DefaultApi* | [**list_condition_operators**](docs/DefaultApi.md#list_condition_operators) | **GET** /api/2/apps/{app_id}/rules/conditions/{condition_value}/operators |
+*OneLogin::DefaultApi* | [**list_condition_values**](docs/DefaultApi.md#list_condition_values) | **GET** /api/2/apps/{app_id}/rules/conditions/{condition_value}/values |
+*OneLogin::DefaultApi* | [**list_conditions**](docs/DefaultApi.md#list_conditions) | **GET** /api/2/apps/{app_id}/rules/conditions |
+*OneLogin::DefaultApi* | [**list_connectors**](docs/DefaultApi.md#list_connectors) | **GET** /api/2/connectors |
+*OneLogin::DefaultApi* | [**list_environment_variables**](docs/DefaultApi.md#list_environment_variables) | **GET** /api/2/hooks/envs |
+*OneLogin::DefaultApi* | [**list_hooks**](docs/DefaultApi.md#list_hooks) | **GET** /api/2/hooks |
+*OneLogin::DefaultApi* | [**list_mapping_action_values**](docs/DefaultApi.md#list_mapping_action_values) | **GET** /api/2/apps/mappings/actions/{actuion_value}/values |
+*OneLogin::DefaultApi* | [**list_mapping_actions**](docs/DefaultApi.md#list_mapping_actions) | **GET** /api/2/apps/mappings/actions |
+*OneLogin::DefaultApi* | [**list_mapping_condition_operators**](docs/DefaultApi.md#list_mapping_condition_operators) | **GET** /api/2/apps/mappings/conditions/{condition_value}/operators |
+*OneLogin::DefaultApi* | [**list_mapping_condition_values**](docs/DefaultApi.md#list_mapping_condition_values) | **GET** /api/2/apps/mappings/conditions/{condition_value}/values |
+*OneLogin::DefaultApi* | [**list_mapping_conditions**](docs/DefaultApi.md#list_mapping_conditions) | **GET** /api/2/apps/mappings/conditions |
+*OneLogin::DefaultApi* | [**list_mappings**](docs/DefaultApi.md#list_mappings) | **GET** /api/2/mappings |
+*OneLogin::DefaultApi* | [**list_risk_rules**](docs/DefaultApi.md#list_risk_rules) | **GET** /api/2/risk/rules |
+*OneLogin::DefaultApi* | [**list_roles**](docs/DefaultApi.md#list_roles) | **GET** /api/2/roles |
+*OneLogin::DefaultApi* | [**list_rules**](docs/DefaultApi.md#list_rules) | **GET** /api/2/apps/{app_id}/rules |
+*OneLogin::DefaultApi* | [**list_scopes**](docs/DefaultApi.md#list_scopes) | **GET** /api/2/api_authorizations/{id}/scopes |
+*OneLogin::DefaultApi* | [**list_users**](docs/DefaultApi.md#list_users) | **GET** /api/2/users |
+*OneLogin::DefaultApi* | [**remove_client_app**](docs/DefaultApi.md#remove_client_app) | **DELETE** /api/2/api_authorizations/{id}/clients/{client_app_id} |
+*OneLogin::DefaultApi* | [**remove_role_admins**](docs/DefaultApi.md#remove_role_admins) | **DELETE** /api/2/roles/{role_id}/admins |
+*OneLogin::DefaultApi* | [**remove_role_users**](docs/DefaultApi.md#remove_role_users) | **DELETE** /api/2/roles/{role_id}/users |
+*OneLogin::DefaultApi* | [**revoke_token**](docs/DefaultApi.md#revoke_token) | **POST** /auth/oauth2/revoke |
+*OneLogin::DefaultApi* | [**set_role_apps**](docs/DefaultApi.md#set_role_apps) | **PUT** /api/2/roles/{role_id}/apps |
+*OneLogin::DefaultApi* | [**track_event**](docs/DefaultApi.md#track_event) | **POST** /api/2/risk/events |
+*OneLogin::DefaultApi* | [**update_access_token_claim**](docs/DefaultApi.md#update_access_token_claim) | **PUT** /api/2/api_authorizations/{id}/claims/{claim_id} |
+*OneLogin::DefaultApi* | [**update_app**](docs/DefaultApi.md#update_app) | **PUT** /api/2/apps/{app_id} |
+*OneLogin::DefaultApi* | [**update_authorization_server**](docs/DefaultApi.md#update_authorization_server) | **PUT** /api/2/api_authorizations/{id} |
+*OneLogin::DefaultApi* | [**update_client_app**](docs/DefaultApi.md#update_client_app) | **PUT** /api/2/api_authorizations/{id}/clients/{client_app_id} |
+*OneLogin::DefaultApi* | [**update_environment_variable**](docs/DefaultApi.md#update_environment_variable) | **PUT** /api/2/hooks/envs/{envvar_id} |
+*OneLogin::DefaultApi* | [**update_hook**](docs/DefaultApi.md#update_hook) | **PUT** /api/2/hooks/{hook_id} |
+*OneLogin::DefaultApi* | [**update_mapping**](docs/DefaultApi.md#update_mapping) | **PUT** /api/2/mappings/{mapping_id} |
+*OneLogin::DefaultApi* | [**update_risk_rule**](docs/DefaultApi.md#update_risk_rule) | **PUT** /api/2/risk/rules/{risk_rule_id} |
+*OneLogin::DefaultApi* | [**update_role**](docs/DefaultApi.md#update_role) | **PUT** /api/2/roles/{role_id} |
+*OneLogin::DefaultApi* | [**update_rule**](docs/DefaultApi.md#update_rule) | **PUT** /api/2/apps/{app_id}/rules/{rule_id} |
+*OneLogin::DefaultApi* | [**update_scope**](docs/DefaultApi.md#update_scope) | **PUT** /api/2/api_authorizations/{id}/scopes/{scope_id} |
+*OneLogin::DefaultApi* | [**update_user**](docs/DefaultApi.md#update_user) | **PUT** /api/2/users/{user_id} |
+*OneLogin::DefaultApi* | [**verify_enrollment**](docs/DefaultApi.md#verify_enrollment) | **PUT** /api/2/mfa/users/{user_id}/registrations/{registration_id} |
+*OneLogin::DefaultApi* | [**verify_enrollment_voice_protect**](docs/DefaultApi.md#verify_enrollment_voice_protect) | **GET** /api/2/mfa/users/{user_id}/registrations/{registration_id} |
+*OneLogin::DefaultApi* | [**verify_factor**](docs/DefaultApi.md#verify_factor) | **PUT** /api/2/mfa/users/{user_id}/verifications/{verification_id} |
+*OneLogin::DefaultApi* | [**verify_factor_saml**](docs/DefaultApi.md#verify_factor_saml) | **POST** /api/2/saml_assertion/verify_factor |
+*OneLogin::DefaultApi* | [**verify_factor_voice**](docs/DefaultApi.md#verify_factor_voice) | **GET** /api/2/mfa/users/{user_id}/verifications/{verification_id} |
 
 
 ## Documentation for Models
@@ -275,4 +273,3 @@ Class | Method | HTTP request | Description
 ## Documentation for Authorization
 
  All endpoints do not require authorization.
-

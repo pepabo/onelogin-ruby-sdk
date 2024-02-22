@@ -274,7 +274,5 @@ module OneLogin
         value
       end
     end
-
   end
-
 end

@@ -215,8 +215,7 @@ module OneLogin
 
     # Returns Auth Settings hash for api client.
     def auth_settings
-      {
-      }
+      {}
     end
 
     # Returns an array of Server setting
@@ -240,8 +239,7 @@ module OneLogin
     end
 
     def operation_server_settings
-      {
-      }
+      {}
     end
 
     # Returns URL based on server settings
@@ -277,6 +275,5 @@ module OneLogin
 
       url
     end
-
   end
 end

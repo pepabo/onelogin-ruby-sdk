@@ -11,6 +11,7 @@ OpenAPI Generator version: 6.0.1
 =end
 
 # Common files
+require 'onelogin/api'
 require 'onelogin/api_client'
 require 'onelogin/api_error'
 require 'onelogin/version'
