@@ -19,10 +19,29 @@ module OneLogin
     end
 
     DefaultApi.public_instance_methods(false)
-              .reject { |m| m =~ /api_client|generate_token|_with_http_info/ }
+              .reject { |m| m =~ /api_client|generate_token|list_|_with_http_info/ }
               .each do |name|
       define_method(name) do |*args|
         @client.send(name, authorazation, *args)
+      end
+    end
+
+    DefaultApi.public_instance_methods(false)
+              .select { |m| m =~ /list_/ }
+              .reject { |m| m =~ /_with_http_info/ }
+              .each do |name|
+      define_method(name) do |opts = {}|
+        result = []
+        cursor = ""
+        loop do
+          data, status, header = @client.send("#{name}_with_http_info", authorazation, opts.merge(cursor: cursor))
+          result += data
+
+          cursor = header['after-cursor']
+          break if status != 200 || cursor.nil?
+        end
+
+        result
       end
     end
   end
